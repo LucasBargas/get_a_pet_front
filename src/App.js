@@ -17,9 +17,6 @@ import NotFound from './pages/NotFound';
 import MyAdoptions from './pages/MyAdoptions';
 
 const App = () => {
-  // eslint-disable-next-line no-undef
-  console.log(process.env.REACT_APP_API);
-
   return (
     <AppArea>
       <Header />
