@@ -33,5 +33,5 @@ Este projeto tem como objetivo simular a disponibilidade, e por fim, a adoção 
 <img alt="Página de edição de Pet" src="https://i.ibb.co/YQq4HkN/adote-pet-edit.png">
 <img alt="Página de edição do usuário" src="https://i.ibb.co/BtK76JQ/adote-profile.png">
 
-Gostaria de ver o repositório do Front end deste app?
+Gostaria de ver o repositório do Backend deste app?
 [Clique aqui](https://github.com/LucasBargas/get_a_pet_backend)
