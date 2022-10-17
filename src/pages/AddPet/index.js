@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
 import useFlashMessage from '../../hooks/useFlashMessages';
 import PetForm from '../../components/PetForm';
+import Head from '../../components/Head';
 
 const AddPet = () => {
   const [token] = useState(localStorage.getItem('token') || '');
@@ -47,13 +48,16 @@ const AddPet = () => {
   };
 
   return (
-    <PetForm
-      loading={loading}
-      title="Adicionar Pet"
-      paragraph="Depois ele ficará disponível para adoção."
-      btnText="Adicionar"
-      handleSubmit={registerPet}
-    />
+    <>
+      <Head title="Adote um Pet - Adicionar pet" />
+      <PetForm
+        loading={loading}
+        title="Adicionar Pet"
+        paragraph="Depois ele ficará disponível para adoção."
+        btnText="Adicionar"
+        handleSubmit={registerPet}
+      />
+    </>
   );
 };
 

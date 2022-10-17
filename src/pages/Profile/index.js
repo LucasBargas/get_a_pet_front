@@ -5,7 +5,7 @@ import api from '../../utils/api';
 import useFlashMessages from '../../hooks/useFlashMessages';
 import * as S from '../Register/styles';
 import RoundedImage from '../../layout/RoundedImage';
-import { Navigate } from 'react-router-dom';
+import Head from '../../components/Head';
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -76,70 +76,73 @@ const Profile = () => {
   if (pageLoading) return <Loading />;
 
   return (
-    <S.FormContainer loading={loading}>
-      <h1>Perfil</h1>
-      {(user.image || preview) && (
-        <RoundedImage
-          src={
-            preview
-              ? URL.createObjectURL(preview)
-              : // eslint-disable-next-line no-undef
-                `${process.env.REACT_APP_API}/images/users/${user.image}`
-          }
-          alt={user.name}
-        />
-      )}
+    <>
+      <Head title="Adote um Pet - Perfil" />
+      <S.FormContainer loading={loading}>
+        <h1>Perfil</h1>
+        {(user.image || preview) && (
+          <RoundedImage
+            src={
+              preview
+                ? URL.createObjectURL(preview)
+                : // eslint-disable-next-line no-undef
+                  `${process.env.REACT_APP_API}/images/users/${user.image}`
+            }
+            alt={user.name}
+          />
+        )}
 
-      <form onSubmit={handleSubmit}>
-        <Input
-          label="Imagem"
-          type="file"
-          name="image"
-          handleOnChange={onFileChange}
-        />
-        <Input
-          label="Nome"
-          type="text"
-          name="name"
-          placeholder="Digite o seu nome..."
-          value={user.name || ''}
-          handleOnChange={handleChange}
-        />
-        <Input
-          label="Email"
-          type="email"
-          name="email"
-          placeholder="Digite o seu email..."
-          value={user.email || ''}
-          handleOnChange={handleChange}
-        />
-        <Input
-          label="Telefone"
-          type="text"
-          name="phone"
-          placeholder="Digite um número para contato..."
-          value={user.phone || ''}
-          handleOnChange={handleChange}
-        />
-        <Input
-          label="Senha"
-          type="password"
-          name="password"
-          placeholder="Digite a sua senha..."
-          handleOnChange={handleChange}
-        />
-        <Input
-          label="Confirmar senha"
-          type="password"
-          name="confirmpassword"
-          placeholder="Confirme a sua senha..."
-          handleOnChange={handleChange}
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Carregando...' : 'Editar'}
-        </button>
-      </form>
-    </S.FormContainer>
+        <form onSubmit={handleSubmit}>
+          <Input
+            label="Imagem"
+            type="file"
+            name="image"
+            handleOnChange={onFileChange}
+          />
+          <Input
+            label="Nome"
+            type="text"
+            name="name"
+            placeholder="Digite o seu nome..."
+            value={user.name || ''}
+            handleOnChange={handleChange}
+          />
+          <Input
+            label="Email"
+            type="email"
+            name="email"
+            placeholder="Digite o seu email..."
+            value={user.email || ''}
+            handleOnChange={handleChange}
+          />
+          <Input
+            label="Telefone"
+            type="text"
+            name="phone"
+            placeholder="Digite um número para contato..."
+            value={user.phone || ''}
+            handleOnChange={handleChange}
+          />
+          <Input
+            label="Senha"
+            type="password"
+            name="password"
+            placeholder="Digite a sua senha..."
+            handleOnChange={handleChange}
+          />
+          <Input
+            label="Confirmar senha"
+            type="password"
+            name="confirmpassword"
+            placeholder="Confirme a sua senha..."
+            handleOnChange={handleChange}
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? 'Carregando...' : 'Editar'}
+          </button>
+        </form>
+      </S.FormContainer>
+    </>
   );
 };
 

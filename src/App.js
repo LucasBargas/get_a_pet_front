@@ -15,8 +15,10 @@ import EditPet from './pages/EditPet';
 import PetDetails from './pages/PetDetails';
 import NotFound from './pages/NotFound';
 import MyAdoptions from './pages/MyAdoptions';
+import useUserContext from './hooks/useUserContext';
 
 const App = () => {
+  const { authenticated } = useUserContext();
   return (
     <AppArea>
       <Header />
@@ -24,14 +26,22 @@ const App = () => {
       <Container>
         <Routes>
           <Route path="/" index element={<Homepage />} />
-          <Route path="/registre-se" element={<Register />} />
-          <Route path="/entrar" element={<Login />} />
-          <Route path="/meus-pets" element={<MyPets />} />
-          <Route path="/meus-pets/adicionar" element={<AddPet />} />
-          <Route path="/meus-pets/editar/:id" element={<EditPet />} />
-          <Route path="/minhas-adocoes" element={<MyAdoptions />} />
           <Route path="/pet/:id" element={<PetDetails />} />
-          <Route path="/perfil" element={<Profile />} />
+          {!authenticated && (
+            <>
+              <Route path="/registre-se" element={<Register />} />
+              <Route path="/entrar" element={<Login />} />
+            </>
+          )}
+          {authenticated && (
+            <>
+              <Route path="/meus-pets" element={<MyPets />} />
+              <Route path="/meus-pets/adicionar" element={<AddPet />} />
+              <Route path="/meus-pets/editar/:id" element={<EditPet />} />
+              <Route path="/minhas-adocoes" element={<MyAdoptions />} />
+              <Route path="/perfil" element={<Profile />} />
+            </>
+          )}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>

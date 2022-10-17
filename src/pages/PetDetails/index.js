@@ -4,6 +4,7 @@ import { useParams, NavLink } from 'react-router-dom';
 import api from '../../utils/api';
 import useFlashMessage from '../../hooks/useFlashMessages';
 import Loading from '../../components/Loading';
+import Head from '../../components/Head';
 
 const PetDetails = () => {
   const [pet, setPet] = useState({});
@@ -52,49 +53,52 @@ const PetDetails = () => {
   if (loading) return <Loading />;
 
   return (
-    'name' in pet && (
-      <S.PetContainer>
-        <div>
-          <h1>Conhecendo o Pet: {pet.name}</h1>
-          <p>Se tiver interesse, marque uma visita para conhecê-lo!</p>
-        </div>
-        <S.PetPhotos>
-          {pet.images.map((img, index) => (
-            <img
-              key={`image ${index}`}
-              // eslint-disable-next-line no-undef
-              src={`${process.env.REACT_APP_API}/images/pets/${img}`}
-              alt={pet.name}
-            />
-          ))}
-        </S.PetPhotos>
-        <p>
-          <span id="bold">Peso:</span> {pet.weight} kg
-        </p>
-        <p>
-          <span id="bold">Idade:</span> {pet.age} anos
-        </p>
-        {token ? (
-          <button onClick={handleSchedule} disabled={loadingButton}>
-            {loadingButton ? 'Solicitando...' : 'Solicitar visita'}
-          </button>
-        ) : (
+    <>
+      <Head title={`Adote um Pet - Pet - ${pet.name && pet.name}`} />
+      {'name' in pet && (
+        <S.PetContainer>
           <div>
-            <p>Você precisa estar logado para solicitar uma visita.</p>
-            <p>
-              <NavLink id="bold" to="/entrar">
-                Acesse sua conta
-              </NavLink>{' '}
-              ou{' '}
-              <NavLink id="bold" to="/registre-se">
-                cadastre-se
-              </NavLink>
-              .
-            </p>
+            <h1>Conhecendo o Pet: {pet.name}</h1>
+            <p>Se tiver interesse, marque uma visita para conhecê-lo!</p>
           </div>
-        )}
-      </S.PetContainer>
-    )
+          <S.PetPhotos>
+            {pet.images.map((img, index) => (
+              <img
+                key={`image ${index}`}
+                // eslint-disable-next-line no-undef
+                src={`${process.env.REACT_APP_API}/images/pets/${img}`}
+                alt={pet.name}
+              />
+            ))}
+          </S.PetPhotos>
+          <p>
+            <span id="bold">Peso:</span> {pet.weight} kg
+          </p>
+          <p>
+            <span id="bold">Idade:</span> {pet.age} anos
+          </p>
+          {token ? (
+            <button onClick={handleSchedule} disabled={loadingButton}>
+              {loadingButton ? 'Solicitando...' : 'Solicitar visita'}
+            </button>
+          ) : (
+            <div>
+              <p>Você precisa estar logado para solicitar uma visita.</p>
+              <p>
+                <NavLink id="bold" to="/entrar">
+                  Acesse sua conta
+                </NavLink>{' '}
+                ou{' '}
+                <NavLink id="bold" to="/registre-se">
+                  cadastre-se
+                </NavLink>
+                .
+              </p>
+            </div>
+          )}
+        </S.PetContainer>
+      )}
+    </>
   );
 };
 

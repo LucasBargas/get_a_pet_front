@@ -4,6 +4,7 @@ import Loading from '../../components/Loading';
 import PetForm from '../../components/PetForm';
 import api from '../../utils/api';
 import useFlashMessages from '../../hooks/useFlashMessages';
+import Head from '../../components/Head';
 
 const EditPet = () => {
   const { id } = useParams();
@@ -72,16 +73,19 @@ const EditPet = () => {
   if (pageLoading) return <Loading />;
 
   return (
-    'name' in pet && (
-      <PetForm
-        loading={loading}
-        title={`Editando o pet: ${pet.name}`}
-        paragraph="Depois da edição os dados serão aualizados no sistema"
-        btnText="Editar"
-        handleSubmit={updatePet}
-        petData={pet}
-      />
-    )
+    <>
+      <Head title="Adote um Pet - Editar Pet" />
+      {'name' in pet && (
+        <PetForm
+          loading={loading}
+          title={`Editando o pet: ${pet.name}`}
+          paragraph="Depois da edição os dados serão aualizados no sistema"
+          btnText="Editar"
+          handleSubmit={updatePet}
+          petData={pet}
+        />
+      )}
+    </>
   );
 };
 
